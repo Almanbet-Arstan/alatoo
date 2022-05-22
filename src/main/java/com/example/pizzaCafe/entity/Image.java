@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_roles")
+@Table(name = "images")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserRole extends BaseEntity{
-    @Column(name = "role_name")
-    private String roleName;
+public class Image extends BaseEntity{
+    @Column(name = "url")
+    private String url;
 }

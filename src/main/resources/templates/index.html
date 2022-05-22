@@ -1,62 +1,146 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>Pizza Factory</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="css/styles.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<div id="container">
-  <div id="incontainer">
-    <div id="header">
-      <ul class="menu">
-        <li class="btn_1"><a href="#">home page</a></li>
-        <li class="line"></li>
-        <li class="btn_2"><a href="#">about us</a></li>
-        <li class="line"></li>
-        <li class="btn_3"><a href="#">our menu</a></li>
-        <li class="line"></li>
-        <li class="btn_4"><a href="#">home delivery</a></li>
-        <li class="line"></li>
-        <li class="btn_5"><a href="#">contacts</a></li>
-      </ul>
-      <img src="images/logo.jpg" width="269" height="80" alt="" id="logo" /> </div>
-    <div id="content">
-      <div id="leftPan">
-        <div id="welcome">
-          <h2></h2>
-          <p class="headline">Nam eu nulla. Donec lobortis purus vel urna. Nunc laoreet lacinia nunc. </p>
-          <p>Nam eu nulla. Donec lobortis purus vel urna. Nunc laoreet lacinia nunc. In volutpat sodales ipsum. Sed vestibulum. Integer in ante. Sed Nunc laoreet lacinia nunc. In volutpat sodales </p>
-          <ul>
-            <li><a href="#">Nam eu nulla. Donec lobortis purus </a></li>
-            <li><a href="#">vel urna. Nunc laoreet lacinia nunc. </a></li>
-            <li><a href="#">In volutpat sodales ipsum. Sed </a></li>
-            <li><a href="#">vestibulum. Integer in ante. Sed </a></li>
-          </ul>
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.98.0">
+    <title>Blog Template · Bootstrap v5.2</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/blog/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+
+
+
+
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
+
+  </head>
+  <body>
+
+  <header th:replace="fragments::header" class="blog-header lh-1 py-3">
+  </header>
+
+  <main>
+        <div class="album py-5 bg-light">
+            <div class="container">
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    <div class="col" th:each="pizza:${pizzas}">
+                        <div class="card shadow-sm">
+                            <img src="https://app.sushishop.ru/assets/images/docs/494/picca-pepperoni.jpg" width="100%" height="225" role="img">
+<!--                            <img th:src="@{/image/{id}(id=${pizza.image.url})}" src="https://app.sushishop.ru/assets/images/docs/494/picca-pepperoni.jpg" width="100%" height="225" role="img">-->
+                            <text th:text="${pizza.pizzaName}" class="text-center" style="font-size: large; color: #ff0000">Thumbnail</text>
+                            <div class="card-body">
+                                <p th:text="${pizza.composition}"class="card-text">Пепперони из цыпленка, моцарелла, томатный соус</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a th:href="@{pizza/{id}(id=${pizza.id})}">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Посмотреть</button>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Заказать</button>
+                                    </div>
+                                    <small th:text="${pizza.price}" class="text-muted">420</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="col">-->
+<!--                        <div class="card shadow-sm">-->
+<!--                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
+
+<!--                            <div class="card-body">-->
+<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                <div class="d-flex justify-content-between align-items-center">-->
+<!--                                    <div class="btn-group">-->
+<!--                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+<!--                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+<!--                                    </div>-->
+<!--                                    <small class="text-muted">9 mins</small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col">-->
+<!--                        <div class="card shadow-sm">-->
+<!--                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>-->
+
+<!--                            <div class="card-body">-->
+<!--                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
+<!--                                <div class="d-flex justify-content-between align-items-center">-->
+<!--                                    <div class="btn-group">-->
+<!--                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
+<!--                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>-->
+<!--                                    </div>-->
+<!--                                    <small class="text-muted">9 mins</small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </div>
         </div>
-      </div>
-      <div id="rightPan">
-        <div id="special">
-          <h2></h2>
-          <div class="specialItem"> <img src="images/img_pizza.jpg" width="75" height="75" alt="" />
-            <p><span class="headline">Nam eu nulla. Donec lobortis purus vel urna. Nunc </span><br />
-              Nam eu nulla. Donec lobortis purus vel urna. Nunc laoreet lacinia nunc. In volutpat sodales ipsum. Sed vestibulum. Integer in ante. Sed Nunc laoreet lacinia nunc. In volutpat sodales <a href="#">BUY IT NOW!</a></p>
-            <div class="clear"></div>
-          </div>
-          <div class="specialItem"> <img src="images/img_pizza-10.jpg" width="75" height="75" alt="" />
-            <p><span class="headline">Nam eu nulla. Donec lobortis purus vel urna. Nunc </span><br />
-              Nam eu nulla. Donec lobortis purus vel urna. Nunc laoreet lacinia nunc. In volutpat sodales ipsum. Sed vestibulum. Integer in ante. Sed Nunc laoreet lacinia nunc. In volutpat sodales <a href="#">BUY IT NOW!</a></p>
-            <div class="clear"></div>
-          </div>
-        </div>
-      </div>
-      <div class="clear" id="end"></div>
-    </div>
-    <div id="footer">
-      <p><a href="#">HOME PAGE</a> | <a href="#">ABOUT US</a> | <a href="#">OUR MENU</a> | <a href="#">HOME DLIVERY</a> | <a href="#">NEWS</a> | <a href="#">CONTACTS</a><br/>
-        Copyright &copy; Your Company Name | Design by <a href="http://freshtemplates.com/">Website Templates</a></p>
-    </div>
-  </div>
-</div>
-</body>
+    </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+
+  <footer th:replace="fragments::footer"></footer>
+  </body>
 </html>

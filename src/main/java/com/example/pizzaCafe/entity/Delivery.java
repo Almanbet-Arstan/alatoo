@@ -3,21 +3,19 @@ package com.example.pizzaCafe.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "delivery")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Delievery extends BaseEntity{
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+public class Delivery extends BaseEntity{
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    @OneToMany
-    @Column(name = "pizzas")
-    private List<Pizza> pizzas;
+    @Column(name = "address")
+    private String address;
 }
